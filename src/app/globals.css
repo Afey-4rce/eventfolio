@@ -1,0 +1,250 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* EventFolio brand palette */
+  --color-ef-bg: var(--ef-bg);
+  --color-ef-surface: var(--ef-surface);
+  --color-ef-ink: var(--ef-ink);
+  --color-ef-muted: var(--ef-muted);
+  --color-ef-line: var(--ef-line);
+  --color-ef-amber: var(--ef-amber);
+  --color-ef-rose: var(--ef-rose);
+  --color-ef-emerald: var(--ef-emerald);
+  --color-ef-violet: var(--ef-violet);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Brand palette — used everywhere */
+  --c-black: #000900;
+  --c-evergreen: #0d2818;
+  --c-limemoss: #96a131;
+  --c-mintcream: #f0faf4;
+  --c-gray: #e7eae3;
+  --c-white: #ffffff;
+
+  /* shadcn defaults (light mode) */
+  --background: var(--c-mintcream);
+  --foreground: var(--c-black);
+  --card: var(--c-white);
+  --card-foreground: var(--c-black);
+  --popover: var(--c-white);
+  --popover-foreground: var(--c-black);
+  --primary: var(--c-limemoss);
+  --primary-foreground: var(--c-black);
+  --secondary: var(--c-gray);
+  --secondary-foreground: var(--c-black);
+  --muted: var(--c-gray);
+  --muted-foreground: var(--c-evergreen);
+  --accent: var(--c-gray);
+  --accent-foreground: var(--c-black);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(13, 40, 24, 0.12);
+  --input: rgba(13, 40, 24, 0.15);
+  --ring: var(--c-limemoss);
+  --chart-1: var(--c-limemoss);
+  --chart-2: var(--c-evergreen);
+  --chart-3: var(--c-black);
+  --chart-4: var(--c-gray);
+  --chart-5: var(--c-mintcream);
+  --sidebar: var(--c-white);
+  --sidebar-foreground: var(--c-black);
+  --sidebar-primary: var(--c-limemoss);
+  --sidebar-primary-foreground: var(--c-black);
+  --sidebar-accent: var(--c-gray);
+  --sidebar-accent-foreground: var(--c-black);
+  --sidebar-border: rgba(13, 40, 24, 0.12);
+  --sidebar-ring: var(--c-limemoss);
+
+  /* EventFolio brand (light mode) */
+  --ef-bg: var(--c-mintcream);
+  --ef-surface: var(--c-white);
+  --ef-ink: var(--c-black);
+  --ef-muted: var(--c-evergreen);
+  --ef-line: rgba(13, 40, 24, 0.12);
+  --ef-amber: var(--c-limemoss);
+  --ef-rose: var(--c-limemoss);
+  --ef-emerald: var(--c-limemoss);
+  --ef-violet: var(--c-limemoss);
+
+  /* Theme-aware text-gradient stops (must contrast with the background) */
+  --ef-gradient-from: var(--c-limemoss);
+  --ef-gradient-mid: var(--c-evergreen);
+  --ef-gradient-to: var(--c-limemoss);
+  /* Entire gradient as one value so browsers recompute it on theme switch */
+  --ef-text-gradient-bg: linear-gradient(120deg, #96a131, #0d2818 60%, #96a131);
+}
+
+.dark {
+  --background: var(--c-black);
+  --foreground: var(--c-white);
+  --card: var(--c-evergreen);
+  --card-foreground: var(--c-white);
+  --popover: var(--c-evergreen);
+  --popover-foreground: var(--c-white);
+  --primary: var(--c-limemoss);
+  --primary-foreground: var(--c-black);
+  --secondary: var(--c-evergreen);
+  --secondary-foreground: var(--c-white);
+  --muted: var(--c-evergreen);
+  --muted-foreground: var(--c-gray);
+  --accent: var(--c-evergreen);
+  --accent-foreground: var(--c-white);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(231, 234, 227, 0.10);
+  --input: rgba(231, 234, 227, 0.15);
+  --ring: var(--c-limemoss);
+  --chart-1: var(--c-limemoss);
+  --chart-2: var(--c-evergreen);
+  --chart-3: var(--c-gray);
+  --chart-4: var(--c-mintcream);
+  --chart-5: var(--c-white);
+  --sidebar: var(--c-evergreen);
+  --sidebar-foreground: var(--c-white);
+  --sidebar-primary: var(--c-limemoss);
+  --sidebar-primary-foreground: var(--c-black);
+  --sidebar-accent: var(--c-evergreen);
+  --sidebar-accent-foreground: var(--c-white);
+  --sidebar-border: rgba(231, 234, 227, 0.10);
+  --sidebar-ring: var(--c-limemoss);
+
+  /* EventFolio brand (dark mode) */
+  --ef-bg: var(--c-black);
+  --ef-surface: var(--c-evergreen);
+  --ef-ink: var(--c-white);
+  --ef-muted: var(--c-gray);
+  --ef-line: rgba(231, 234, 227, 0.08);
+  --ef-amber: var(--c-limemoss);
+  --ef-rose: var(--c-limemoss);
+  --ef-emerald: var(--c-limemoss);
+  --ef-violet: var(--c-limemoss);
+
+  /* Theme-aware text-gradient stops (must contrast with the background) */
+  --ef-gradient-from: var(--c-limemoss);
+  --ef-gradient-mid: var(--c-white);
+  --ef-gradient-to: var(--c-gray);
+  /* Entire gradient as one value so browsers recompute it on theme switch */
+  --ef-text-gradient-bg: linear-gradient(120deg, #96a131, #ffffff 60%, #e7eae3);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--ef-muted) 30%, transparent);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--ef-muted) 50%, transparent);
+    background-clip: padding-box;
+  }
+}
+
+@layer utilities {
+  /* Marquee */
+  .ef-marquee {
+    display: flex;
+    width: max-content;
+    animation: ef-marquee 32s linear infinite;
+  }
+  .ef-marquee-reverse {
+    animation-direction: reverse;
+  }
+  .ef-marquee-fast {
+    animation-duration: 18s;
+  }
+  @keyframes ef-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ef-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .ef-text-gradient {
+    background: var(--ef-text-gradient-bg);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ef-glass {
+    background: color-mix(in srgb, var(--ef-surface) 70%, transparent);
+    backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  .ef-grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--ef-line) 60%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--ef-line) 60%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}

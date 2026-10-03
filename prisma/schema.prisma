@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("user") // "user" | "admin"
+  plan         String   @default("free") // "free" | "pro" | "studio"
+  avatarUrl    String?
+  coverUrl     String?
+  bio          String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions    Session[]
+  sites       Site[]
+  analytics   AnalyticsEvent[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Site {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String // "event" | "portfolio"
+  title       String
+  slug        String
+  subtitle    String?
+  description String?
+  theme       String   @default("aurora") // "aurora" | "noir" | "sunset" | "mint" | "crimson"
+  content     String   // JSON string of generated site content
+  coverImage  String?
+  published   Boolean  @default(false)
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analytics AnalyticsEvent[]
+
+  @@index([userId])
+  @@index([slug])
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  type        String // "event" | "portfolio"
+  category    String // e.g. "Conference", "Workshop", "Designer", "Photographer"
+  description String
+  thumbnail   String
+  theme       String
+  preview     String // JSON string describing the layout
+  popularity  Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  siteId    String?
+  event     String // "view" | "like" | "publish" | "signup" | "create_site"
+  metadata  String? // JSON string
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  site Site? @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([siteId])
+  @@index([event])
+}
